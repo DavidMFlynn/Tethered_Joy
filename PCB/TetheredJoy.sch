@@ -1,0 +1,241 @@
+EESchema Schematic File Version 4
+LIBS:TetheredJoy-cache
+EELAYER 29 0
+EELAYER END
+$Descr A 11000 8500
+encoding utf-8
+Sheet 1 1
+Title "Tethered Joystick"
+Date "2019-04-01"
+Rev "n/c"
+Comp "DMFE"
+Comment1 "One hand serial joystick w/ buttons and LEDs"
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L MCU_Microchip_PIC16:PIC16F648A-ISO U?
+U 1 1 5CA2A54B
+P 4750 3550
+F 0 "U?" H 3950 4200 50  0000 C CNN
+F 1 "PIC16F1847-ISO" H 4700 3750 50  0000 C CNN
+F 2 "" H 4750 3550 50  0001 C CIN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/40300c.pdf" H 4750 3550 50  0001 C CNN
+	1    4750 3550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x04 J?
+U 1 1 5CA2B278
+P 1200 3250
+F 0 "J?" H 1118 3475 50  0000 C CNN
+F 1 "Conn_01x04" H 1118 3476 50  0001 C CNN
+F 2 "" H 1200 3250 50  0001 C CNN
+F 3 "~" H 1200 3250 50  0001 C CNN
+	1    1200 3250
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x05 J?
+U 1 1 5CA2CECB
+P 1250 4700
+F 0 "J?" H 1168 5025 50  0000 C CNN
+F 1 "Conn_01x05" H 1168 5026 50  0001 C CNN
+F 2 "" H 1250 4700 50  0001 C CNN
+F 3 "~" H 1250 4700 50  0001 C CNN
+	1    1250 4700
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x05 J?
+U 1 1 5CA2E968
+P 8900 3300
+F 0 "J?" H 8850 3650 50  0000 L CNN
+F 1 "Conn_01x05" H 8980 3251 50  0001 L CNN
+F 2 "" H 8900 3300 50  0001 C CNN
+F 3 "~" H 8900 3300 50  0001 C CNN
+	1    8900 3300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:LED_Dual_2pin D?
+U 1 1 5CA2FD57
+P 7250 4300
+F 0 "D?" H 7250 4696 50  0000 C CNN
+F 1 "LED_Dual_2pin" H 7250 4605 50  0000 C CNN
+F 2 "" H 7250 4300 50  0001 C CNN
+F 3 "~" H 7250 4300 50  0001 C CNN
+	1    7250 4300
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Device:LED_Dual_2pin D?
+U 1 1 5CA312ED
+P 7250 5000
+F 0 "D?" H 7250 5396 50  0000 C CNN
+F 1 "LED_Dual_2pin" H 7250 5305 50  0000 C CNN
+F 2 "" H 7250 5000 50  0001 C CNN
+F 3 "~" H 7250 5000 50  0001 C CNN
+	1    7250 5000
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small R?
+U 1 1 5CA32F19
+P 6350 4050
+F 0 "R?" H 6409 4096 50  0000 L CNN
+F 1 "R_Small" H 6409 4005 50  0000 L CNN
+F 2 "" H 6350 4050 50  0001 C CNN
+F 3 "~" H 6350 4050 50  0001 C CNN
+	1    6350 4050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5CA34C75
+P 5300 2650
+F 0 "C?" H 5392 2696 50  0000 L CNN
+F 1 "C_Small" H 5392 2605 50  0000 L CNN
+F 2 "" H 5300 2650 50  0001 C CNN
+F 3 "~" H 5300 2650 50  0001 C CNN
+	1    5300 2650
+	1    0    0    -1  
+$EndComp
+Text Notes 800  3500 0    62   ~ 0
+GND\n+5V In\nRX\nTX
+Text Notes 900  4950 0    62   ~ 0
+VPP\nVDD\nVSS\nPGD\nPGC
+Text Notes 550  3650 0    62   ~ 0
+TTL Serial to USB Adaptor
+Text Notes 950  5100 0    62   ~ 0
+Programming
+Text Notes 8700 3700 0    62   ~ 0
+Joystick
+Text Notes 9050 3550 0    62   ~ 0
+GND\n+5V\nVRX\nVRY\nSW
+$Comp
+L Device:C_Small C?
+U 1 1 5CA35F0E
+P 2400 4400
+F 0 "C?" H 2492 4446 50  0000 L CNN
+F 1 "C_Small" H 2492 4355 50  0000 L CNN
+F 2 "" H 2400 4400 50  0001 C CNN
+F 3 "~" H 2400 4400 50  0001 C CNN
+	1    2400 4400
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR?
+U 1 1 5CA36E8F
+P 4750 2300
+F 0 "#PWR?" H 4750 2150 50  0001 C CNN
+F 1 "+5V" H 4765 2473 50  0000 C CNN
+F 2 "" H 4750 2300 50  0001 C CNN
+F 3 "" H 4750 2300 50  0001 C CNN
+	1    4750 2300
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR?
+U 1 1 5CA37B04
+P 1700 3000
+F 0 "#PWR?" H 1700 2850 50  0001 C CNN
+F 1 "+5V" H 1715 3173 50  0000 C CNN
+F 2 "" H 1700 3000 50  0001 C CNN
+F 3 "" H 1700 3000 50  0001 C CNN
+	1    1700 3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5CA3922C
+P 4750 4500
+F 0 "#PWR?" H 4750 4250 50  0001 C CNN
+F 1 "GND" H 4755 4327 50  0000 C CNN
+F 2 "" H 4750 4500 50  0001 C CNN
+F 3 "" H 4750 4500 50  0001 C CNN
+	1    4750 4500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5CA3976C
+P 5300 2750
+F 0 "#PWR?" H 5300 2500 50  0001 C CNN
+F 1 "GND" H 5305 2577 50  0000 C CNN
+F 2 "" H 5300 2750 50  0001 C CNN
+F 3 "" H 5300 2750 50  0001 C CNN
+	1    5300 2750
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5CA3A143
+P 8500 2900
+F 0 "#PWR?" H 8500 2650 50  0001 C CNN
+F 1 "GND" H 8505 2727 50  0000 C CNN
+F 2 "" H 8500 2900 50  0001 C CNN
+F 3 "" H 8500 2900 50  0001 C CNN
+	1    8500 2900
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR?
+U 1 1 5CA3AFD4
+P 8300 3050
+F 0 "#PWR?" H 8300 2900 50  0001 C CNN
+F 1 "+5V" H 8315 3223 50  0000 C CNN
+F 2 "" H 8300 3050 50  0001 C CNN
+F 3 "" H 8300 3050 50  0001 C CNN
+	1    8300 3050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8700 3100 8600 3100
+Wire Wire Line
+	8600 3100 8600 2800
+Wire Wire Line
+	8600 2800 8500 2800
+Wire Wire Line
+	8500 2800 8500 2900
+Wire Wire Line
+	8700 3200 8300 3200
+Wire Wire Line
+	8300 3200 8300 3050
+Wire Wire Line
+	8700 3300 6850 3300
+Wire Wire Line
+	6850 3300 6850 3150
+Wire Wire Line
+	6850 3150 5850 3150
+Wire Wire Line
+	5850 3250 6750 3250
+Wire Wire Line
+	6750 3250 6750 3400
+Wire Wire Line
+	6750 3400 8700 3400
+Wire Wire Line
+	1400 3250 1700 3250
+Wire Wire Line
+	1700 3250 1700 3000
+$Comp
+L power:GND #PWR?
+U 1 1 5CA3C856
+P 1550 3000
+F 0 "#PWR?" H 1550 2750 50  0001 C CNN
+F 1 "GND" H 1555 2827 50  0000 C CNN
+F 2 "" H 1550 3000 50  0001 C CNN
+F 3 "" H 1550 3000 50  0001 C CNN
+	1    1550 3000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1400 3150 1450 3150
+Wire Wire Line
+	1450 3150 1450 2950
+Wire Wire Line
+	1450 2950 1550 2950
+Wire Wire Line
+	1550 2950 1550 3000
+$EndSCHEMATC
