@@ -21,6 +21,7 @@
 kCmd_SetMode	EQU	0x81	;+1 data (SysMode), return ACK
 kCmd_GetMode	EQU	0x01
 kCmd_GetJoy	EQU	0x82	;Return X,Y,Btn,HBtn
+kCmd_SetLEDs	EQU	0x83	;+1 data (JoyLEDs), return ACK
 ;
 ;
 kCmd_SaveParams	EQU	0x94	;Save all eeprom params, return ACK
@@ -107,6 +108,16 @@ Cmd_GetMode_end:
 	goto	RS232_Send_S0
 ;
 kCmd_GetJoy_end:
+;---kCmd_SetLEDs--------------------
+	movlw	kCmd_SetLEDs
+	subwf	Param78,W
+	SKPZ
+	bra	kCmd_SetLEDs_end
+; Set Joystick LEDs
+	moviw	FSR1++
+	movwf	JoyLEDs
+	goto	TX_ACK
+kCmd_SetLEDs_end:
 ;---kCmd_SaveParams-----------------
 	movlw	kCmd_SaveParams
 	subwf	Param78,W	;aka RX_Data

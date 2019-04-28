@@ -259,6 +259,7 @@ kMaxMode	EQU	.0
 	JoyY
 	SwitchFlags
 	SwitchHFlags
+	JoyLEDs
 ;
 ;-----------------------
 ;Below here are saved in eprom
@@ -268,7 +269,17 @@ kMaxMode	EQU	.0
 	SysFlags
 ;
 	endc
+;
 ;--------------------------------------------------------------
+;---JoyLEDs bits---
+JoyLEDsD4R	EQU	0
+JoyLEDsD4G	EQU	1
+JoyLEDsD5R	EQU	2
+JoyLEDsD5G	EQU	3
+JoyLEDsD2	EQU	4
+JoyLEDsD3	EQU	5
+JoyLEDsD6	EQU	6
+;
 ;---SerFlags bits---
 #Define	DataReceivedFlag	SerFlags,1
 #Define	DataSentFlag	SerFlags,2
@@ -481,6 +492,17 @@ ProgStartVector	CLRF	PCLATH
 	BTFSS	SWJoy_In
 	BSF	JoySW_HFlag
 ;
+; D2,D3,D6 On/Off
+	movf	JoyLEDs,W
+	movlb	1	;Bank 1
+	btfsc	WREG,JoyLEDsD2	;LED On?
+	bcf	LED2_Tris	; Yes, clear TRIS bit
+	btfsc	WREG,JoyLEDsD3
+	bcf	LED3_Tris
+	btfsc	WREG,JoyLEDsD6
+	bcf	LED4_Tris
+;
+	movlb	0x00	;bank 0	
 ;--------------------
 ; Sys LED time
 	DECFSZ	SysLEDCount,F	;Is it time?
@@ -547,6 +569,32 @@ MainLoop	CLRWDT
 	mCall0To1	HandleRXData
 ML_1:
 ;
+; set bicolor leds
+	movf	JoyLEDs,W
+	movwf	Param78
+	movlb	2	;Bank 2
+;
+	btfss	Param78,JoyLEDsD4R
+	bcf	LED4_RLat
+	btfsc	Param78,JoyLEDsD4R
+	bsf	LED4_RLat
+;
+	btfss	Param78,JoyLEDsD4G
+	bcf	LED4_GLat
+	btfsc	Param78,JoyLEDsD4G
+	bsf	LED4_GLat
+;
+	btfss	Param78,JoyLEDsD5R
+	bcf	LED5_RLat
+	btfsc	Param78,JoyLEDsD5R
+	bsf	LED5_RLat
+;
+	btfss	Param78,JoyLEDsD5G
+	bcf	LED5_GLat
+	btfsc	Param78,JoyLEDsD5G
+	bsf	LED5_GLat	
+;
+	movlb	0	;Bank 0
 ;
 	CALL	ReadAN
 ;
