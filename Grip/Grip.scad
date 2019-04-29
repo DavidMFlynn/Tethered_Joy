@@ -14,6 +14,8 @@
 //  ***** for STL output *****
 // JoystickMountPlate();
 // rotate([0,90,0]) Grip();
+// rotate([0,-90,0]) GripSide();  // Right Side
+// rotate([0,90,0]) mirror([1,0,0]) GripSide(); // Left Side
 // ****************************************
 //  ***** for Viewing *****
 //
@@ -329,7 +331,7 @@ module GripSide(){
 		
 } // GripSide
 
-rotate([0,-90,0]) GripSide();
+//rotate([0,-90,0]) GripSide();
 
 
 
