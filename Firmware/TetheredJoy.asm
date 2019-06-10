@@ -130,23 +130,21 @@ ANSELA_Val	EQU	b'00000011'	;RA0/AN0, RA1/AN1
 #Define	RA5_In	PORTA,5	;VPP/MCLR*
 #Define	BiLED5_RedAnode	PORTA,6	;D5 Bi-Color LED Red+/Green-
 #Define	BiLED5_RedCathode	PORTA,7	;D5 Bi-Color LED Red-/Green+
-LED4_RBit	EQU	2	;LED4 (High=Red/Low=Green Output)
-LED4_GBit	EQU	3	;LED4 (High=Green/Low=Red Output)
+LED4_RBit	EQU	3	;LED4 (High=Red/Low=Green Output)
+LED4_GBit	EQU	4	;LED4 (High=Green/Low=Red Output)
 LED5_RBit	EQU	6	;LED5 (High=Red/Low=Green Output)
 LED5_GBit	EQU	7	;LED5 (High=Green/Low=Red Output)
 #Define	LED4_RLat	LATA,LED4_RBit	;LED4 (High=Red/Low=Green Low Output)
 #Define	LED4_GLat	LATA,LED4_GBit	;LED4 (High=Green/Low=Red Low Output)
-#Define	RGLED4_Tris	TRISA,LED4_RBit	;LED4 blinking
+;#Define	RGLED4_Tris	TRISA,LED4_RBit	;LED4 blinking
 #Define	LED5_RLat	LATA,LED5_RBit	;LED5 (High=Red/Low=Green Low Output)
 #Define	LED5_GLat	LATA,LED5_GBit	;LED5 (High=Green/Low=Red Low Output)
-#Define	RGLED5_Tris	TRISA,LED5_RBit	;LED5 blinking
-
-
+;#Define	RGLED5_Tris	TRISA,LED5_RBit	;LED5 blinking
 ;
 ;
 ;    Port B bits
 PortBDDRBits	EQU	b'11011111'	;MagEnc_CSBit, CCP1, MagEnc_CLKBit
-PortBValue	EQU	b'00010000'
+PortBValue	EQU	b'00000000'
 ANSELB_Val	EQU	b'00000000'	;RB5/AN7
 ;
 #Define	RB0_Out	LATB,0	;LED1/SW1 (Active Low Input/Output)(System LED)
@@ -163,17 +161,17 @@ SysLED_Bit	EQU	0	;LED1/SW1 (Active Low Input/Output)
 LED2_Bit	EQU	1	;LED2/SW2 (Active Low Input/Output)
 LED3_Bit	EQU	3	;LED3/SW3 (Active Low Input/Output)
 LED4_Bit	EQU	4	;LED4/SW4 (Active Low Input/Output)
-
-#Define	SysLED_Tris	TRISB,SysLED_Bit	;LED1 (Active Low Output)
-#Define	LED1_Tris	TRISA,LED1_Bit	;LED1 (Active Low Output)
-#Define	LED1_Lat	LATA,LED1_Bit	;LED1 (Active Low Output)
 ;
-#Define	LED2_Tris	TRISA,LED2_Bit	;LED2 (Active Low Output)
-#Define	LED2_Lat	LATA,LED2_Bit	;LED2 (Active Low Output)
-#Define	LED3_Tris	TRISA,LED3_Bit	;LED3 (Active Low Output)
-#Define	LED3_Lat	LATA,LED3_Bit	;LED3 (Active Low Output)
-#Define	LED4_Tris	TRISA,LED4_Bit	;LED4 (Active Low Output)
-#Define	LED4_Lat	LATA,LED4_Bit	;LED4 (Active Low Output)
+#Define	SysLED_Tris	TRISB,SysLED_Bit	;LED1 (Active Low Output)
+#Define	LED1_Tris	TRISB,LED1_Bit	;LED1 (Active Low Output)
+#Define	LED1_Lat	LATB,LED1_Bit	;LED1 (Active Low Output)
+;
+#Define	LED2_Tris	TRISB,LED2_Bit	;LED2 (Active Low Output)
+#Define	LED2_Lat	LATB,LED2_Bit	;LED2 (Active Low Output)
+#Define	LED3_Tris	TRISB,LED3_Bit	;LED3 (Active Low Output)
+#Define	LED3_Lat	LATB,LED3_Bit	;LED3 (Active Low Output)
+#Define	LED4_Tris	TRISB,LED4_Bit	;LED4 (Active Low Output)
+#Define	LED4_Lat	LATB,LED4_Bit	;LED4 (Active Low Output)
 ;
 ;========================================================================================
 ;========================================================================================
@@ -570,19 +568,20 @@ MainLoop	CLRWDT
 ML_1:
 ;
 ; set bicolor leds
+	movlb	0
 	movf	JoyLEDs,W
 	movwf	Param78
 	movlb	2	;Bank 2
 ;
 	btfss	Param78,JoyLEDsD4R
-	bcf	LED4_RLat
+	bcf	LED4_RLat	;Green or Off
 	btfsc	Param78,JoyLEDsD4R
-	bsf	LED4_RLat
+	bsf	LED4_RLat	;Red
 ;
 	btfss	Param78,JoyLEDsD4G
-	bcf	LED4_GLat
+	bcf	LED4_GLat	;Red or Off
 	btfsc	Param78,JoyLEDsD4G
-	bsf	LED4_GLat
+	bsf	LED4_GLat	;Green
 ;
 	btfss	Param78,JoyLEDsD5R
 	bcf	LED5_RLat
