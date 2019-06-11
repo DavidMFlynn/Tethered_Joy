@@ -2,7 +2,7 @@
 ;
 ;    Filename:      TetheredJoy.asm
 ;    Created:       4/8/2019
-;    File Version:  1.1d1   4/8/2019
+;    File Version:  1.1a1   6/10/2019
 ;
 ;    Author:        David M. Flynn
 ;    Company:       Oxford V.U.E., Inc.
@@ -23,6 +23,7 @@
 ;
 ;
 ;    History:
+; 1.1a1   6/10/2019 	Working. Time to do some tests.
 ; 1.1d1   4/8/2019	Copied from SerialServo 1.1b1
 ; 1.1b1   3/21/2019	Port for Rev C PCB
 ;

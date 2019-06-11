@@ -1,0 +1,66 @@
+TTL Serial connected to a USB to Serial.
+
+Uses TTL serial from a USB to 5 volt TTL serial converter to interface a joystick 
+ with buttons and LEDs.
+Packet serial is used to give each device a unique address. 
+
+Communication:
+38,400 baud, 8 data, 1 stop, no parity.
+To connect multiple Serial Devices to a single connection add a 4.7KΩ resistor to the
+ Rx line of the USB to serial converter, a.k.a. the common Tx line of the Serial Servos.
+
+Packet Serial:
+All packets are 6 bytes w/o optional sync bytes and checksum:
+Source Address, Destination Address and 4 data bytes
+or
+0xDD,0xDD,Source Address, Destination Address and 4 data bytes, Checksum 
+(XOR of Source Addr, Dest Addr, 4 Data bytes)
+
+Default master address is 1
+Default slave address is 2
+
+All commands return something. 
+Some return a data packet (Slave,Master,Data0,Data1,Data2,Data3,CSum),
+others return only a single byte (0xFF) as an acknowledgment.
+
+Commands:
+==========================================================================================
+kCmd_SetMode(0x81)	+1 data (SysMode), return ACK
+kCmd_GetMode(0x01)
+kCmd_GetJoy(0x82)	Return X,Y,Btn,HBtn
+kCmd_SetLEDs(0x83)	+1 data (JoyLEDs), return ACK
+
+kCmd_SaveParams(0x94)	Save all eeprom params, return ACK
+kCmd_RestoreParams(0x95) Copy to ram, return ACK
+kCmd_ReBoot(0x99)	ReBoot the controller
+kCmd_RunBootloader(0x9A) Set EEPROM (0xFF) = 0xFF and reboot
+
+; these commands save params and return a 0,0,0,0 packet with the new address
+kCmd_SetMasterAddr(0xA1) +1 data, return a zero packet
+kCmd_SetSlaveAddr(0xA2) +1 data, return a zero packet
+;
+;Special packet (0xDD, 0xDD, 0x01, 0x02, 0xAA, 0x00, 0x00, 0x00, checksum)
+kCmd_SendIDString(0xAA) returns "DMFE T-Joy\n"
+
+;---JoyLEDs bits---
+JoyLEDsD4R	EQU	0
+JoyLEDsD4G	EQU	1
+JoyLEDsD5R	EQU	2
+JoyLEDsD5G	EQU	3
+JoyLEDsD2	EQU	4
+JoyLEDsD3	EQU	5
+JoyLEDsD6	EQU	6
+
+; Currently Active
+#Define	SW1_Flag	SwitchFlags,0
+#Define	SW2_Flag	SwitchFlags,1
+#Define	SW3_Flag	SwitchFlags,2
+#Define	SW4_Flag	SwitchFlags,3
+#Define	JoySW_Flag	SwitchFlags,4
+;
+; History Flags, cleared by reading
+#Define	SW1_HFlag	SwitchHFlags,0
+#Define	SW2_HFlag	SwitchHFlags,1
+#Define	SW3_HFlag	SwitchHFlags,2
+#Define	SW4_HFlag	SwitchHFlags,3
+#Define	JoySW_HFlag	SwitchHFlags,4
