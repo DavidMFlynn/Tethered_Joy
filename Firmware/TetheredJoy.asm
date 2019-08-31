@@ -108,7 +108,7 @@ kRS232SyncByteValue	EQU	0xDD
 	constant	UseRS232Chksum=1
 ;
 kRS232_MasterAddr	EQU	0x01	;Master's Address
-kRS232_SlaveAddr	EQU	0x02	;This Slave's Address
+kRS232_SlaveAddr	EQU	0x32	;This Slave's Address
 ;
 #Define	_C	STATUS,C
 #Define	_Z	STATUS,Z
